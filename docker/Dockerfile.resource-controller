@@ -1,0 +1,138 @@
+# Resource Controller Dockerfile
+
+# Build stage
+FROM node:18-alpine AS builder
+
+# Install build dependencies
+RUN apk add --no-cache \
+    python3 \
+    make \
+    g++ \
+    git \
+    curl
+
+# Set working directory
+WORKDIR /app
+
+# Copy package files
+COPY package*.json ./
+COPY yarn.lock ./
+
+# Install dependencies
+RUN npm ci --only=production --no-audit --no-fund
+
+# Copy source code
+COPY . .
+
+# Build frontend assets
+RUN npm run build
+
+# Remove dev dependencies and clean cache
+RUN npm prune --production && npm cache clean --force
+
+# Production stage
+FROM node:18-alpine AS production
+
+# Install runtime dependencies
+RUN apk add --no-cache \
+    dumb-init \
+    curl \
+    ca-certificates \
+    tzdata \
+    su-exec
+
+# Create app user
+RUN addgroup -g 1001 -S nodejs && \
+    adduser -S resourcectrl -u 1001 -G nodejs
+
+# Set working directory
+WORKDIR /app
+
+# Copy built application from builder stage
+COPY --from=builder --chown=resourcectrl:nodejs /app/dist ./dist
+COPY --from=builder --chown=resourcectrl:nodejs /app/node_modules ./node_modules
+COPY --from=builder --chown=resourcectrl:nodejs /app/package.json ./package.json
+
+# Copy server files
+COPY --chown=resourcectrl:nodejs modules/resource-controller/ ./modules/resource-controller/
+COPY --chown=resourcectrl:nodejs config/ ./config/
+
+# Create storage directories
+RUN mkdir -p /app/storage/{logs,quota,audit} && \
+    chown -R resourcectrl:nodejs /app/storage
+
+# Create startup script
+COPY --chown=resourcectrl:nodejs docker/scripts/start-resource-ctrl.sh /app/start.sh
+RUN chmod +x /app/start.sh
+
+# Environment variables
+ENV NODE_ENV=production \
+    PORT=8082 \
+    HOST=0.0.0.0 \
+    STORAGE_PATH=/app/storage \
+    CONFIG_PATH=/app/config \
+    QUOTA_PATH=/app/storage/quota \
+    AUDIT_LOGS=/app/storage/audit/audit.log
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+    CMD curl -f http://localhost:${PORT}/health || exit 1
+
+# Expose ports
+EXPOSE 8082
+
+# Switch to non-root user
+USER resourcectrl
+
+# Use dumb-init to handle signals properly
+ENTRYPOINT ["dumb-init", "--"]
+
+# Start the application
+CMD ["/app/start.sh"]
+
+# Development stage
+FROM node:18-alpine AS development
+
+# Install development tools
+RUN apk add --no-cache \
+    git \
+    curl \
+    vim \
+    bash
+
+# Install global development tools
+RUN npm install -g \
+    nodemon \
+    pm2 \
+    @playwright/test
+
+WORKDIR /app
+
+# Copy package files
+COPY package*.json ./
+
+# Install all dependencies (including dev)
+RUN npm install
+
+# Copy source code
+COPY . .
+
+# Create development user
+RUN addgroup -g 1001 -S nodejs && \
+    adduser -S resourcectrl -u 1001 -G nodejs && \
+    chown -R resourcectrl:nodejs /app
+
+# Environment variables for development
+ENV NODE_ENV=development \
+    PORT=8082 \
+    HOST=0.0.0.0 \
+    DEBUG=resource-ctrl:* \
+    CHOKIDAR_USEPOLLING=true
+
+# Expose additional ports for development
+EXPOSE 8082 9229 9230
+
+USER resourcectrl
+
+# Development command
+CMD ["npm", "run", "dev"]

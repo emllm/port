@@ -5,9 +5,9 @@
     "main": "server/index.js",
     "scripts": {
         "start": "node server/index.js",
-        "dev": "nodemon server/index.js",
-        "build": "webpack --mode=production",
-        "build:dev": "webpack --mode=development",
+        "dev": "vite",
+        "build": "vite build",
+        "preview": "vite preview",
         "test": "jest",
         "test:watch": "jest --watch",
         "lint": "eslint .",
@@ -20,6 +20,7 @@
         "@types/react": "^19.1.8",
         "@types/react-dom": "^19.1.6",
         "@types/react-router-dom": "^5.3.3",
+        "@vitejs/plugin-react": "^4.5.2",
         "compression": "^1.7.4",
         "cors": "^2.8.5",
         "dotenv": "^16.3.1",
@@ -31,6 +32,7 @@
         "react-dom": "^19.1.0",
         "react-router-dom": "^7.6.2",
         "uuid": "^9.0.0",
+        "vite": "^6.3.5",
         "ws": "^8.13.0"
     },
     "devDependencies": {

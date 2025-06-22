@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PWA Marketplace - Settings</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    <div id="app" class="min-h-screen flex flex-col">
+        <!-- Header -->
+        <header class="bg-white shadow-sm">
+            <nav class="container mx-auto px-4 py-3 flex justify-between items-center">
+                <div class="text-xl font-bold text-gray-800">
+                    <i class="fas fa-cog mr-2"></i> Settings
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button id="toggleDarkMode" class="p-2 rounded hover:bg-gray-200">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button id="backToHome" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+                        <i class="fas fa-arrow-left mr-2"></i> Back
+                    </button>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Main Content -->
+        <main class="flex-1 container mx-auto px-4 py-4">
+            <div class="grid grid-cols-12 gap-4">
+                <!-- Settings Sidebar -->
+                <aside id="settingsSidebar" class="col-span-3 bg-white rounded-lg shadow-md p-4">
+                    <nav class="space-y-2">
+                        <a href="#general" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded active">
+                            <i class="fas fa-cog mr-2"></i> General
+                        </a>
+                        <a href="#security" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded">
+                            <i class="fas fa-shield-alt mr-2"></i> Security
+                        </a>
+                        <a href="#updates" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded">
+                            <i class="fas fa-sync-alt mr-2"></i> Updates
+                        </a>
+                        <a href="#notifications" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded">
+                            <i class="fas fa-bell mr-2"></i> Notifications
+                        </a>
+                        <a href="#appearance" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded">
+                            <i class="fas fa-paint-brush mr-2"></i> Appearance
+                        </a>
+                        <a href="#storage" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded">
+                            <i class="fas fa-hdd mr-2"></i> Storage
+                        </a>
+                        <a href="#advanced" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded">
+                            <i class="fas fa-tools mr-2"></i> Advanced
+                        </a>
+                    </nav>
+                </aside>
+
+                <!-- Settings Content -->
+                <div class="col-span-9 bg-white rounded-lg shadow-md p-6">
+                    <!-- General Settings -->
+                    <section id="general" class="mb-8">
+                        <h2 class="text-xl font-semibold mb-4">General</h2>
+                        <div class="space-y-4">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium mb-1">
+                                        Language
+                                    </label>
+                                    <select id="language" class="w-full px-3 py-2 border rounded focus:ring-2 focus:ring-blue-500">
+                                        <option value="en">English</option>
+                                        <option value="pl">Polish</option>
+                                        <option value="es">Spanish</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium mb-1">
+                                        Theme
+                                    </label>
+                                    <select id="theme" class="w-full px-3 py-2 border rounded focus:ring-2 focus:ring-blue-500">
+                                        <option value="light">Light</option>
+                                        <option value="dark">Dark</option>
+                                        <option value="system">System</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-1">
+                                    Start with system
+                                </label>
+                                <div class="mt-2">
+                                    <label class="inline-flex items-center">
+                                        <input type="checkbox" id="startWithSystem" class="form-checkbox">
+                                        <span class="ml-2">Start PWA Marketplace when system starts</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Security Settings -->
+                    <section id="security" class="mb-8 hidden">
+                        <h2 class="text-xl font-semibold mb-4">Security</h2>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium mb-1">
+                                    Password Protection
+                                </label>
+                                <div class="mt-2">
+                                    <label class="inline-flex items-center">
+                                        <input type="checkbox" id="passwordProtection" class="form-checkbox">
+                                        <span class="ml-2">Require password to access</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-1">
+                                    Sandbox Mode
+                                </label>
+                                <div class="mt-2">
+                                    <label class="inline-flex items-center">
+                                        <input type="checkbox" id="sandboxMode" class="form-checkbox">
+                                        <span class="ml-2">Enable sandbox mode for PWAs</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Updates Settings -->
+                    <section id="updates" class="mb-8 hidden">
+                        <h2 class="text-xl font-semibold mb-4">Updates</h2>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium mb-1">
+                                    Automatic Updates
+                                </label>
+                                <div class="mt-2">
+                                    <select id="autoUpdate" class="w-full px-3 py-2 border rounded focus:ring-2 focus:ring-blue-500">
+                                        <option value="always">Always check for updates</option>
+                                        <option value="daily">Check daily</option>
+                                        <option value="weekly">Check weekly</option>
+                                        <option value="manual">Manual only</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-1">
+                                    Beta Channel
+                                </label>
+                                <div class="mt-2">
+                                    <label class="inline-flex items-center">
+                                        <input type="checkbox" id="betaChannel" class="form-checkbox">
+                                        <span class="ml-2">Enable beta channel updates</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Notifications Settings -->
+                    <section id="notifications" class="mb-8 hidden">
+                        <h2 class="text-xl font-semibold mb-4">Notifications</h2>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium mb-1">
+                                    Enable Notifications
+                                </label>
+                                <div class="mt-2">
+                                    <label class="inline-flex items-center">
+                                        <input type="checkbox" id="notificationsEnabled" class="form-checkbox">
+                                        <span class="ml-2">Enable system notifications</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-1">
+                                    Notification Types
+                                </label>
+                                <div class="mt-2">
+                                    <label class="inline-flex items-center mb-2">
+                                        <input type="checkbox" id="updateNotifications" class="form-checkbox">
+                                        <span class="ml-2">Updates available</span>
+                                    </label>
+                                    <label class="inline-flex items-center mb-2">
+                                        <input type="checkbox" id="errorNotifications" class="form-checkbox">
+                                        <span class="ml-2">Errors and warnings</span>
+                                    </label>
+                                    <label class="inline-flex items-center">
+                                        <input type="checkbox" id="successNotifications" class="form-checkbox">
+                                        <span class="ml-2">Success notifications</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Appearance Settings -->
+                    <section id="appearance" class="mb-8 hidden">
+                        <h2 class="text-xl font-semibold mb-4">Appearance</h2>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium mb-1">
+                                    Font Size
+                                </label>
+                                <div class="mt-2">
+                                    <select id="fontSize" class="w-full px-3 py-2 border rounded focus:ring-2 focus:ring-blue-500">
+                                        <option value="small">Small</option>
+                                        <option value="medium">Medium</option>
+                                        <option value="large">Large</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-1">
+                                    Icons Style
+                                </label>
+                                <div class="mt-2">
+                                    <select id="iconsStyle" class="w-full px-3 py-2 border rounded focus:ring-2 focus:ring-blue-500">
+                                        <option value="default">Default</option>
+                                        <option value="rounded">Rounded</option>
+                                        <option value="square">Square</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Storage Settings -->
+                    <section id="storage" class="mb-8 hidden">
+                        <h2 class="text-xl font-semibold mb-4">Storage</h2>
+                        <div class="space-y-4">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium mb-1">
+                                        Apps Directory
+                                    </label>
+                                    <div class="relative">
+                                        <input type="text" id="appsDirectory" 
+                                               class="w-full px-3 py-2 border rounded focus:ring-2 focus:ring-blue-500">
+                                        <button id="selectAppsDir" 
+                                                class="absolute right-2 top-1/2 -translate-y-1/2 bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600">
+                                            <i class="fas fa-folder-open"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium mb-1">
+                                        Cache Directory
+                                    </label>
+                                    <div class="relative">
+                                        <input type="text" id="cacheDirectory" 
+                                               class="w-full px-3 py-2 border rounded focus:ring-2 focus:ring-blue-500">
+                                        <button id="selectCacheDir" 
+                                                class="absolute right-2 top-1/2 -translate-y-1/2 bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600">
+                                            <i class="fas fa-folder-open"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <button id="clearCache" class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">
+                                    <i class="fas fa-trash mr-2"></i> Clear Cache
+                                </button>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Advanced Settings -->
+                    <section id="advanced" class="hidden">
+                        <h2 class="text-xl font-semibold mb-4">Advanced</h2>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium mb-1">
+                                    Debug Mode
+                                </label>
+                                <div class="mt-2">
+                                    <label class="inline-flex items-center">
+                                        <input type="checkbox" id="debugMode" class="form-checkbox">
+                                        <span class="ml-2">Enable debug logging</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-1">
+                                    Developer Tools
+                                </label>
+                                <div class="mt-2">
+                                    <label class="inline-flex items-center">
+                                        <input type="checkbox" id="devTools" class="form-checkbox">
+                                        <span class="ml-2">Enable developer tools</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="mt-auto py-4 text-center text-gray-600">
+            <p>© 2025 PWA Marketplace. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script src="settings.js"></script>
+</body>
+</html>
