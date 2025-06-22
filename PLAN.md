@@ -1,7 +1,3 @@
-# port
-user-friendly PWA Marketplace z GitHub integration, wbudowanym password managerem i secure sandboxing.
-
-
 # PWA Marketplace - Instalacja dla Użytkowników Nietechnicznych
 
 ## 🎯 Strategia "Double-Click & Done"
@@ -544,3 +540,553 @@ impl AutoUpdater {
 4. Follow setup wizard
 
 **Result**: Każdy użytkownik, niezależnie od wiedzy technicznej, może zainstalować i używać PWA Marketplace w ciągu 5 minut! 🎉
+
+
+
+
+
+
+
+
+
+
+# Plan Realizacji PWA Marketplace
+
+## 🎯 Overview
+
+**Cel**: Stworzenie user-friendly PWA Marketplace z GitHub integration, wbudowanym password managerem i secure sandboxing.
+
+**Czas realizacji**: ~20 tygodni (5 miesięcy)  
+**Architektura**: Tauri (Rust + Web) + Docker + MCP Bridge  
+**Target**: Nietechniczni użytkownicy  
+
+## 📋 Fazy Rozwoju
+
+### Phase 1: Foundation (2-3 tygodnie)
+**Cel**: Podstawowa aplikacja desktop z system tray
+
+**Deliverables**:
+- ✅ Working Tauri application
+- ✅ System tray integration  
+- ✅ Basic UI framework
+- ✅ Cross-platform builds
+- ✅ Auto-start functionality
+
+**Pliki do utworzenia**:
+- `src-tauri/src/main.rs`
+- `src-tauri/src/system_tray.rs`
+- `src-tauri/tauri.conf.json`
+- `src-tauri/Cargo.toml`
+- `src/index.html`
+- `package.json`
+
+**Milestone**: User może zainstalować aplikację i zobaczyć ikonę w system tray
+
+---
+
+### Phase 2: Password Manager (1-2 tygodnie) 
+**Cel**: Secure local password storage
+
+**Deliverables**:
+- ✅ Encrypted password database
+- ✅ Master password setup
+- ✅ Password CRUD operations
+- ✅ Password generator
+- ✅ Import/Export functionality
+
+**Pliki do utworzenia**:
+- `src-tauri/src/password_manager.rs`
+- `src-tauri/src/crypto.rs`
+- `src/password-manager/`
+  - `index.html`
+  - `password-list.js`
+  - `password-form.js`
+  - `master-password.js`
+
+**Milestone**: User może bezpiecznie przechowywać i zarządzać hasłami
+
+---
+
+### Phase 3: Docker Integration (2-3 tygodnie)
+**Cel**: Transparent Docker management
+
+**Deliverables**:
+- ✅ Docker auto-detection
+- ✅ Docker Desktop auto-install
+- ✅ Service lifecycle management
+- ✅ Health monitoring
+- ✅ Resource management
+
+**Pliki do utworzenia**:
+- `src-tauri/src/docker_manager.rs`
+- `docker/Dockerfile.marketplace`
+- `docker/docker-compose.yml`
+- `docker/init-scripts/setup.sh`
+- `src/status/docker-status.js`
+
+**Milestone**: Docker services uruchamiają się automatycznie w tle
+
+---
+
+### Phase 4: GitHub Store (3-4 tygodnie)
+**Cel**: GitHub PWA discovery and installation
+
+**Deliverables**:
+- ✅ GitHub API integration
+- ✅ PWA repository scanning
+- ✅ App categorization
+- ✅ OAuth token generation
+- ✅ Installation wizard
+- ✅ App metadata parsing
+
+**Pliki do utworzenia**:
+- `src-tauri/src/github_auth.rs`
+- `modules/github-store/`
+  - `index.js`
+  - `manifest-parser.js` 
+  - `repository-scanner.js`
+  - `category-classifier.js`
+- `src/marketplace/`
+  - `store.html`
+  - `app-card.js`
+  - `category-filter.js`
+  - `search.js`
+
+**Milestone**: User może przeglądać i instalować PWA z GitHub
+
+---
+
+### Phase 5: Sandbox & MCP (4-5 tygodni)
+**Cel**: Secure PWA execution with MCP
+
+**Deliverables**:
+- ✅ PWA sandbox runtime
+- ✅ MCP server/client
+- ✅ Permission system
+- ✅ Resource proxies
+- ✅ File system bridge
+- ✅ Security policies
+
+**Pliki do utworzenia**:
+- `modules/mcp-bridge/`
+  - `server.js`
+  - `client.js` 
+  - `protocols/filesystem.js`
+  - `protocols/storage.js`
+  - `security.js`
+- `modules/sandbox-runtime/`
+  - `pwa-container.js`
+  - `context-manager.js`
+  - `resource-proxy.js`
+- `modules/resource-controller/`
+  - `permission-manager.js`
+  - `folder-selector.js`
+  - `acl-engine.js`
+
+**Milestone**: PWA apps działają w bezpiecznym sandboxie z kontrolowanymi uprawnieniami
+
+---
+
+### Phase 6: Polish & Distribution (2-3 tygodnie)
+**Cel**: Production-ready releases
+
+**Deliverables**:
+- ✅ Auto-updater
+- ✅ Platform installers
+- ✅ Error handling & logging
+- ✅ Performance optimization
+- ✅ Documentation
+- ✅ CI/CD pipeline
+
+**Pliki do utworzenia**:
+- `src-tauri/src/auto_updater.rs`
+- `src-tauri/src/logger.rs`
+- `installers/` (Windows/macOS/Linux)
+- `docs/`
+  - `README.md`
+  - `INSTALLATION.md`
+  - `DEVELOPMENT.md`
+  - `API.md`
+- `.github/workflows/build.yml`
+
+**Milestone**: Aplikacja gotowa do public release
+
+## 🎯 Success Metrics
+
+### Technical Metrics
+- **Installation time**: < 5 minut dla nietechnicznego użytkownika
+- **App size**: < 20MB installer
+- **Memory usage**: < 200MB w idle
+- **Startup time**: < 10 sekund
+- **PWA apps**: > 100 dostępnych w store
+
+### User Experience Metrics  
+- **Setup completion rate**: > 90%
+- **Daily active users retention**: > 70%
+- **Support tickets**: < 5% users need help
+- **User satisfaction**: > 4.5/5 stars
+
+### Security Metrics
+- **Zero data breaches**
+- **All file access logged**
+- **Permissions explicitly granted**
+- **Encrypted storage validated**
+
+## 🛠️ Development Stack
+
+### Backend (Rust)
+- **Framework**: Tauri 1.5+
+- **Database**: SQLCipher (encrypted SQLite)
+- **Crypto**: AES-256-GCM, Argon2
+- **HTTP**: Reqwest async client
+- **Docker**: Bollard (Docker API)
+
+### Frontend (JavaScript)
+- **Framework**: Vanilla JS / Lit Components
+- **UI Library**: Tailwind CSS
+- **Build Tool**: Vite
+- **PWA Runtime**: Service Workers + MCP
+
+### Infrastructure
+- **Containerization**: Docker + Docker Compose
+- **CI/CD**: GitHub Actions
+- **Distribution**: GitHub Releases
+- **Monitoring**: Built-in telemetry
+
+## 📦 Project Structure
+
+```
+pwa-marketplace/
+├── src-tauri/              # Rust backend
+├── src/                    # Frontend web app
+├── modules/                # Core modules
+├── docker/                 # Docker configuration  
+├── installers/             # Platform installers
+├── docs/                   # Documentation
+├── tests/                  # Test suites
+└── scripts/                # Build scripts
+```
+
+## 🚀 Next Steps
+
+1. **Setup repository** z proper folder structure
+2. **Initialize Tauri project** z basic configuration
+3. **Implement Phase 1** - Foundation
+4. **Create MVP** dla user testing
+5. **Iterate based on feedback**
+6. **Continue through phases** zgodnie z planem
+
+## 📊 Resource Requirements
+
+### Development Team
+- **1x Rust Developer** (Tauri backend)
+- **1x Frontend Developer** (JavaScript/CSS)
+- **1x DevOps Engineer** (Docker/CI/CD)
+- **1x UX/UI Designer** (User experience)
+
+### Infrastructure
+- **GitHub repository** (free)
+- **Docker Hub** dla images (free tier)
+- **GitHub Actions** dla CI/CD (free tier)
+- **Testing devices** (Windows/macOS/Linux)
+
+**Total estimated cost**: ~$0 dla open source project 🎉
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# 📋 PWA Marketplace - Kompletny Przegląd Projektu
+
+## ✅ Wygenerowane Pliki
+
+### **Phase 1: Foundation (Kompletne)**
+1. **main.rs** - Główna aplikacja Tauri z system tray
+2. **system_tray.rs** - Zarządzanie system tray i menu
+3. **tauri.conf.json** - Konfiguracja Tauri
+4. **Cargo.toml** - Zależności Rust
+5. **setup_wizard_ui.html** - Kreator pierwszej konfiguracji
+
+### **Phase 2: Password Manager (Kompletne)**
+6. **password_manager.rs** - Secure password storage z AES-256
+
+### **Phase 3: Docker Integration (Kompletne)**
+7. **docker_manager.rs** - Zarządzanie Docker containers
+8. **docker-compose.yml** - Kompletna orchestracja services
+
+### **Phase 4: GitHub Store (Częściowo)**
+9. **github-store.js** - Integracja z GitHub API
+10. **marketplace.html** - Główny interfejs PWA store
+
+### **Dokumentacja i Konfiguracja**
+11. **project_plan.md** - Szczegółowy plan realizacji
+12. **user_friendly_deployment.md** - Strategia deploymentu
+13. **modular_pwa_marketplace.md** - Architektura modularna
+14. **README.md** - Kompletna dokumentacja projektu
+
+## 🚧 Pliki do Dokończenia
+
+### **Brakujące Komponenty Backend (Rust)**
+- `folder_selector.rs` - Native folder dialogs
+- `github_auth.rs` - GitHub OAuth flow
+- `auto_updater.rs` - System aktualizacji
+- `logger.rs` - System logowania
+
+### **Brakujące Moduły JavaScript**
+- `modules/mcp-bridge/server.js` - MCP Server implementation
+- `modules/mcp-bridge/client.js` - MCP Client dla PWA
+- `modules/resource-controller/permission-manager.js` - Zarządzanie uprawnieniami
+- `modules/app-manager/installer.js` - Instalacja aplikacji
+- `modules/sandbox-runtime/pwa-container.js` - Sandbox runtime
+
+### **Brakujące Frontend Components**
+- `src/password-manager/index.html` - UI Password managera
+- `src/settings/index.html` - Panel ustawień
+- `components/app-card.js` - Komponent karty aplikacji
+- `components/permission-dialog.js` - Dialog uprawnień
+
+### **Brakujące Docker Files**
+- `docker/Dockerfile.marketplace` - Dockerfile dla main app
+- `docker/Dockerfile.mcp-bridge` - Dockerfile dla MCP
+- `docker/Dockerfile.resource-controller` - Dockerfile dla resource controller
+- `docker/nginx/nginx.conf` - Konfiguracja Nginx
+
+### **Brakujące Configuration Files**
+- `config/security-policies.json` - Polityki bezpieczeństwa
+- `config/github-sources.json` - Źródła aplikacji
+- `config/permissions.json` - Definicje uprawnień
+
+### **Brakujące Scripts & Tools**
+- `scripts/build.sh` - Build automation
+- `scripts/deploy.sh` - Deployment automation
+- `.github/workflows/build.yml` - CI/CD pipeline
+
+## 📊 Status Realizacji
+
+| Faza | Status | Pliki | Kompletność |
+|------|--------|-------|-------------|
+| **Phase 1: Foundation** | ✅ Gotowe | 5/5 | 100% |
+| **Phase 2: Password Manager** | ✅ Gotowe | 1/1 | 100% |
+| **Phase 3: Docker Integration** | ✅ Gotowe | 2/2 | 100% |
+| **Phase 4: GitHub Store** | 🚧 W trakcie | 2/8 | 25% |
+| **Phase 5: Sandbox & MCP** | ❌ Nie rozpoczęte | 0/12 | 0% |
+| **Phase 6: Polish & Distribution** | ❌ Nie rozpoczęte | 0/8 | 0% |
+
+**Ogólny postęp: 10/36 plików (28%)**
+
+## 🎯 Najważniejsze Brakujące Elementy
+
+### **Krytyczne dla MVP (Minimum Viable Product)**
+1. **MCP Bridge Server** - Komunikacja PWA ↔ System
+2. **Permission Manager** - Zarządzanie uprawnieniami
+3. **App Installer** - Instalacja aplikacji z GitHub
+4. **Sandbox Runtime** - Bezpieczne uruchamianie PWA
+5. **GitHub Auth** - OAuth flow dla tokenów
+
+### **Ważne dla User Experience**
+1. **Folder Selector** - Native dialogi wyboru folderów
+2. **Password Manager UI** - Interface zarządzania hasłami
+3. **Settings Panel** - Konfiguracja aplikacji
+4. **Auto Updater** - Automatyczne aktualizacje
+5. **Error Handling** - Obsługa błędów
+
+### **Nice-to-Have dla Production**
+1. **Monitoring** - Metrics i logging
+2. **CI/CD Pipeline** - Automatyczne buildy
+3. **Platform Installers** - MSI, DMG, AppImage
+4. **Documentation** - User guides
+5. **Testing Suite** - Unit i integration tests
+
+## 🚀 Plan Dokończenia
+
+### **Tydzień 1-2: Dokończenie Core Backend**
+```rust
+// Priorytet 1: Podstawowe komponenty Rust
+src-tauri/src/folder_selector.rs
+src-tauri/src/github_auth.rs
+src-tauri/src/auto_updater.rs
+src-tauri/src/logger.rs
+```
+
+### **Tydzień 3-4: MCP Bridge & Permissions**
+```javascript
+// Priorytet 2: MCP i zarządzanie uprawnieniami
+modules/mcp-bridge/server.js
+modules/mcp-bridge/client.js
+modules/resource-controller/permission-manager.js
+```
+
+### **Tydzień 5-6: App Management**
+```javascript
+// Priorytet 3: Instalacja i zarządzanie aplikacjami
+modules/app-manager/installer.js
+modules/sandbox-runtime/pwa-container.js
+modules/github-store/manifest-parser.js
+```
+
+### **Tydzień 7-8: Frontend UI**
+```html
+// Priorytet 4: User interface
+src/password-manager/index.html
+src/settings/index.html
+components/permission-dialog.js
+components/app-card.js
+```
+
+### **Tydzień 9-10: Docker & Deployment**
+```dockerfile
+// Priorytet 5: Containeryzacja
+docker/Dockerfile.marketplace
+docker/Dockerfile.mcp-bridge
+docker/nginx/nginx.conf
+scripts/build.sh
+```
+
+## 🔧 Instrukcje Implementacji
+
+### **1. Uruchomienie Obecnej Wersji**
+```bash
+# Sklonuj projekt
+git clone <repo-url>
+cd pwa-marketplace
+
+# Build Tauri app
+cd src-tauri
+cargo build
+
+# Uruchom development
+npm run tauri dev
+```
+
+### **2. Priorytety Development**
+1. **Dokończ folder_selector.rs** - Native file dialogs
+2. **Zaimplementuj MCP server** - Core functionality
+3. **Stwórz permission system** - Security foundation
+4. **Dodaj GitHub integration** - App discovery
+5. **Zbuduj sandbox runtime** - App execution
+
+### **3. Testowanie podczas Development**
+```bash
+# Test każdego komponentu osobno
+cargo test --bin password_manager
+npm test -- --testPathPattern=mcp-bridge
+docker-compose up mcp-bridge
+```
+
+## 💡 Kluczowe Decyzje Architekturalne
+
+### **✅ Sprawdzone Rozwiązania**
+- **Tauri + Rust** - Najlepszy stosunek performance/size
+- **Docker Compose** - Łatwe zarządzanie services
+- **AES-256 + Argon2** - Industry standard encryption
+- **GitHub API** - Naturalne źródło PWA apps
+
+### **🤔 Do Weryfikacji**
+- **MCP Protocol** - Czy to najlepszy sposób komunikacji?
+- **Permission Model** - Czy wystarczająco granular?
+- **Sandbox Strategy** - iframe vs container vs process?
+- **Update Strategy** - Hot updates vs full restart?
+
+## 📈 Metryki Sukcesu
+
+### **Technical Metrics**
+- ✅ **Installation**: < 5 minut dla nietechnicznego użytkownika
+- ✅ **App Size**: < 20MB installer
+- 🎯 **Memory Usage**: < 200MB w idle
+- 🎯 **Startup Time**: < 10 sekund
+- 🎯 **PWA Discovery**: > 100 dostępnych aplikacji
+
+### **User Experience Metrics**
+- 🎯 **Setup Completion Rate**: > 90%
+- 🎯 **Daily Active Users**: > 70% retention
+- 🎯 **Support Tickets**: < 5% użytkowników potrzebuje pomocy
+- 🎯 **User Satisfaction**: > 4.5/5 stars
+
+### **Security Metrics**
+- ✅ **Zero Data Breaches**: Wszystkie dane lokalne
+- ✅ **Access Logging**: 100% operacji na plikach logowane
+- ✅ **Explicit Permissions**: User kontroluje każdy dostęp
+- ✅ **Encrypted Storage**: Wszystkie wrażliwe dane zaszyfrowane
+
+## 🎉 Co Już Działa
+
+### **Desktop Application** 
+- ✅ System tray integration
+- ✅ Native window management
+- ✅ Cross-platform support
+- ✅ Auto-start capability
+
+### **Security Foundation**
+- ✅ Encrypted password storage
+- ✅ Master password protection
+- ✅ Token management
+- ✅ Secure key derivation
+
+### **Docker Infrastructure**
+- ✅ Multi-service orchestration
+- ✅ Health monitoring
+- ✅ Volume management
+- ✅ Network isolation
+
+### **GitHub Integration**
+- ✅ Repository discovery
+- ✅ PWA validation
+- ✅ Manifest parsing
+- ✅ Rate limiting
+
+## 🚧 Co Wymaga Dokończenia
+
+### **Critical Path Items**
+1. **MCP Communication** - PWA ↔ System bridge
+2. **Permission Dialogs** - User consent flows
+3. **App Installation** - Download + setup process
+4. **Sandbox Execution** - Secure PWA runtime
+5. **Error Handling** - Graceful failure management
+
+### **User Experience Items**
+1. **Setup Wizard Integration** - Connect UI to backend
+2. **Password Manager UI** - Full management interface
+3. **Settings Panel** - App configuration
+4. **Folder Selection** - Native OS dialogs
+5. **Progress Indicators** - Installation feedback
+
+### **Production Readiness**
+1. **Auto Updater** - Background updates
+2. **Logging System** - Debug and audit trails
+3. **Performance Monitoring** - Resource usage tracking
+4. **Build Pipeline** - Automated releases
+5. **Documentation** - User and developer guides
+
+## 🎯 Następne Kroki
+
+### **Immediate (1-2 dni)**
+1. Dokończ `folder_selector.rs` dla native dialogs
+2. Zaimplementuj podstawowy `github_auth.rs` OAuth
+3. Stwórz prosty MCP server skeleton
+
+### **Short Term (1-2 tygodnie)**
+1. Dokończ MCP bridge z podstawowymi protocols
+2. Zaimplementuj permission manager
+3. Stwórz działający app installer
+
+### **Medium Term (1-2 miesiące)**
+1. Pełny sandbox runtime dla PWA
+2. Kompletny UI dla wszystkich features
+3. Production-ready deployment
+
+### **Long Term (3-6 miesięcy)**
+1. Advanced features (plugin system, AI recommendations)
+2. Enterprise features (centralized management)
+3. Mobile companion app
+
+**Status: Gotowy do kontynuacji development! 🚀**

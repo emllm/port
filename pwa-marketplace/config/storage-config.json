@@ -1,0 +1,48 @@
+{
+    "providers": {
+        "indexeddb": {
+            "enabled": true,
+            "name": "pwa-marketplace-db",
+            "version": 1,
+            "objectStores": {
+                "apps": {
+                    "keyPath": "id",
+                    "indexes": [
+                        { "name": "name", "keyPath": "name", "unique": false },
+                        { "name": "version", "keyPath": "version", "unique": false }
+                    ]
+                },
+                "data": {
+                    "keyPath": "id",
+                    "indexes": [
+                        { "name": "appId", "keyPath": "appId", "unique": false },
+                        { "name": "type", "keyPath": "type", "unique": false }
+                    ]
+                }
+            }
+        },
+        "localstorage": {
+            "enabled": true,
+            "prefix": "pwa-marketplace_",
+            "maxSize": 10485760
+        }
+    },
+    "cache": {
+        "enabled": true,
+        "maxSize": 52428800,
+        "ttl": 86400,
+        "cleanupInterval": 3600
+    },
+    "encryption": {
+        "enabled": true,
+        "algorithm": "aes-256-gcm",
+        "keyLength": 32,
+        "saltRounds": 10
+    },
+    "backup": {
+        "enabled": true,
+        "interval": 3600,
+        "retention": 7,
+        "path": "/storage/backup"
+    }
+}

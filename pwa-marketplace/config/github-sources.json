@@ -1,0 +1,96 @@
+{
+    "version": "1.0",
+    "sources": {
+        "official": {
+            "name": "Official Marketplace",
+            "url": "https://github.com/pwa-marketplace/official-apps",
+            "type": "github",
+            "categories": [
+                "productivity",
+                "development",
+                "communication",
+                "entertainment"
+            ],
+            "verification": {
+                "required": true,
+                "methods": [
+                    "code-signing",
+                    "github-actions",
+                    "release-notes"
+                ]
+            }
+        },
+        "community": {
+            "name": "Community Apps",
+            "url": "https://github.com/pwa-marketplace/community-apps",
+            "type": "github",
+            "categories": [
+                "productivity",
+                "development",
+                "communication",
+                "entertainment",
+                "utilities"
+            ],
+            "verification": {
+                "required": false,
+                "methods": [
+                    "community-vote",
+                    "github-actions"
+                ]
+            }
+        },
+        "enterprise": {
+            "name": "Enterprise Apps",
+            "url": "https://github.com/pwa-marketplace/enterprise-apps",
+            "type": "github",
+            "categories": [
+                "business",
+                "productivity",
+                "security",
+                "monitoring"
+            ],
+            "verification": {
+                "required": true,
+                "methods": [
+                    "code-signing",
+                    "saml",
+                    "enterprise-verification"
+                ]
+            }
+        }
+    },
+    "categories": {
+        "productivity": {
+            "name": "Productivity",
+            "description": "Tools to help you be more productive"
+        },
+        "development": {
+            "name": "Development",
+            "description": "Developer tools and IDEs"
+        },
+        "communication": {
+            "name": "Communication",
+            "description": "Chat, email, and collaboration tools"
+        },
+        "entertainment": {
+            "name": "Entertainment",
+            "description": "Games, media, and entertainment apps"
+        },
+        "utilities": {
+            "name": "Utilities",
+            "description": "System tools and utilities"
+        },
+        "business": {
+            "name": "Business",
+            "description": "Enterprise and business apps"
+        },
+        "security": {
+            "name": "Security",
+            "description": "Security and monitoring tools"
+        },
+        "monitoring": {
+            "name": "Monitoring",
+            "description": "System and performance monitoring"
+        }
+    }
+}

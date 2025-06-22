@@ -1,0 +1,31 @@
+pwa-marketplace-desktop/
+├── src-tauri/
+│   ├── src/
+│   │   ├── main.rs                # Main Tauri app
+│   │   ├── docker_manager.rs      # Docker integration
+│   │   ├── password_manager.rs    # Local password storage
+│   │   ├── github_auth.rs         # GitHub OAuth flow
+│   │   ├── folder_selector.rs     # Native folder dialogs
+│   │   ├── system_tray.rs         # System tray management
+│   │   └── auto_updater.rs        # Auto-update functionality
+│   ├── Cargo.toml                 # Rust dependencies
+│   ├── tauri.conf.json           # Tauri configuration
+│   ├── build.rs                   # Build script
+│   └── icons/                     # App icons
+├── src/                           # Frontend (React/Vue/Vanilla)
+│   ├── setup-wizard/              # Setup wizard UI
+│   ├── marketplace/               # Main marketplace UI
+│   ├── password-manager/          # Password manager UI
+│   └── settings/                  # Settings UI
+├── docker/                        # Docker configuration
+│   ├── Dockerfile.embedded        # Lightweight Docker image
+│   ├── docker-compose.embedded.yml
+│   └── init-scripts/              # Auto-setup scripts
+├── installers/                    # Platform-specific installers
+│   ├── windows/                   # Windows MSI/NSIS
+│   ├── macos/                     # macOS DMG/PKG
+│   └── linux/                     # AppImage/DEB/RPM
+└── scripts/
+    ├── build-all.sh              # Cross-platform build
+    ├── package-installers.sh     # Create installers
+    └── release.sh                # GitHub release automation

@@ -1,0 +1,42 @@
+{
+    "server": {
+        "port": 3002,
+        "maxConnections": 100,
+        "timeout": 30000,
+        "heartbeat": {
+            "interval": 30000,
+            "timeout": 10000
+        }
+    },
+    "protocols": {
+        "storage": {
+            "enabled": true,
+            "maxFileSize": 10485760,
+            "allowedTypes": ["application/json", "text/plain", "image/*"]
+        },
+        "filesystem": {
+            "enabled": true,
+            "rootPath": "/storage/apps",
+            "maxDepth": 5
+        },
+        "system": {
+            "enabled": true,
+            "info": {
+                "exposeOs": false,
+                "exposeHardware": false
+            }
+        }
+    },
+    "security": {
+        "encryption": {
+            "enabled": true,
+            "algorithm": "aes-256-gcm",
+            "keyLength": 32
+        },
+        "authentication": {
+            "enabled": true,
+            "tokenExpiration": 3600,
+            "refreshInterval": 1800
+        }
+    }
+}

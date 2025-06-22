@@ -1,0 +1,47 @@
+{
+  "package": {
+    "productName": "PWA Marketplace",
+    "version": "0.1.0",
+    "authors": ["Your Name <your.email@example.com>"],
+    "description": "A secure PWA marketplace with native desktop integration"
+  },
+  "tauri": {
+    "bundle": {
+      "identifier": "com.pwa-marketplace",
+      "icon": ["icons/icon.ico", "icons/icon.icns"],
+      "shortDescription": "Secure PWA Marketplace",
+      "copyright": "© 2025 Your Company",
+      "category": "DeveloperTool"
+    },
+    "windows": {
+      "icon": "icons/icon.ico",
+      "title": "PWA Marketplace",
+      "width": 1024,
+      "height": 768,
+      "resizable": true,
+      "center": true,
+      "transparent": false,
+      "decorations": true
+    },
+    "macos": {
+      "icon": "icons/icon.icns",
+      "title": "PWA Marketplace",
+      "width": 1024,
+      "height": 768,
+      "resizable": true,
+      "center": true,
+      "transparent": false,
+      "decorations": true
+    },
+    "linux": {
+      "icon": "icons/icon.png",
+      "title": "PWA Marketplace",
+      "width": 1024,
+      "height": 768,
+      "resizable": true,
+      "center": true,
+      "transparent": false,
+      "decorations": true
+    }
+  }
+}
