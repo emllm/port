@@ -1,0 +1,54 @@
+{
+  "version": "1.0",
+  "sources": {
+    "official": {
+      "name": "Official PWA Marketplace",
+      "url": "https://github.com/pwa-marketplace",
+      "token": "${GITHUB_TOKEN}",
+      "scopes": [
+        "public_repo",
+        "read:packages",
+        "write:packages"
+      ],
+      "rateLimit": {
+        "maxRequests": 5000,
+        "resetInterval": 3600
+      }
+    },
+    "community": {
+      "name": "Community PWA Apps",
+      "url": "https://github.com/pwa-marketplace/community-apps",
+      "token": "${GITHUB_TOKEN}",
+      "scopes": [
+        "public_repo",
+        "read:packages"
+      ],
+      "rateLimit": {
+        "maxRequests": 1000,
+        "resetInterval": 3600
+      }
+    }
+  },
+  "verification": {
+    "required": true,
+    "methods": [
+      "signature",
+      "webhook",
+      "certificate"
+    ],
+    "threshold": {
+      "minScore": 0.8,
+      "maxAge": 86400
+    }
+  },
+  "cache": {
+    "enabled": true,
+    "ttl": 3600,
+    "maxSize": 104857600 // 100MB
+  },
+  "updateSchedule": {
+    "interval": "daily",
+    "time": "02:00:00",
+    "timezone": "UTC"
+  }
+}

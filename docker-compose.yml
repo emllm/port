@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  marketplace:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.marketplace
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./src:/app/src
+      - ./dist:/app/dist
+    environment:
+      - NODE_ENV=production
+
+  mcp-bridge:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.mcp-bridge
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+
+  resource-controller:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.resource-controller
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=production
+
+  nginx:
+    build:
+      context: docker/nginx
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - marketplace
+      - mcp-bridge
+      - resource-controller

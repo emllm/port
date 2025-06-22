@@ -1,0 +1,60 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build application
+        run: npm run build
+
+      - name: Run tests
+        run: npm test
+
+      - name: Build Docker images
+        run: |
+          docker build -t marketplace-app -f docker/Dockerfile.marketplace .
+          docker build -t mcp-bridge -f docker/Dockerfile.mcp-bridge .
+          docker build -t resource-controller -f docker/Dockerfile.resource-controller .
+
+      - name: Push Docker images
+        if: github.ref == 'refs/heads/main'
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          push: true
+          tags: |
+            your-registry/marketplace-app:${{ github.sha }}
+            your-registry/mcp-bridge:${{ github.sha }}
+            your-registry/resource-controller:${{ github.sha }}
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Deploy to production
+        env:
+          KUBECONFIG: ${{ secrets.KUBECONFIG }}
+        run: |
+          kubectl apply -f k8s/deployment.yaml
+          kubectl apply -f k8s/service.yaml
+          kubectl apply -f k8s/ingress.yaml

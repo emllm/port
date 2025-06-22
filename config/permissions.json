@@ -1,0 +1,125 @@
+{
+  "version": "1.0",
+  "permissions": {
+    "system": {
+      "description": "System-level permissions",
+      "scopes": [
+        "admin",
+        "user",
+        "guest"
+      ],
+      "actions": {
+        "admin": [
+          "system:config",
+          "system:update",
+          "user:manage",
+          "app:approve",
+          "permission:grant"
+        ],
+        "user": [
+          "app:install",
+          "app:update",
+          "app:uninstall",
+          "storage:manage",
+          "settings:view"
+        ],
+        "guest": [
+          "app:view",
+          "app:search",
+          "settings:view"
+        ]
+      }
+    },
+    "network": {
+      "description": "Network-related permissions",
+      "scopes": [
+        "public",
+        "private",
+        "restricted"
+      ],
+      "actions": {
+        "public": [
+          "network:request",
+          "network:websocket",
+          "network:stream"
+        ],
+        "private": [
+          "network:internal",
+          "network:api",
+          "network:websocket:private"
+        ],
+        "restricted": [
+          "network:admin",
+          "network:monitor",
+          "network:debug"
+        ]
+      }
+    },
+    "storage": {
+      "description": "Storage permissions",
+      "scopes": [
+        "local",
+        "shared",
+        "encrypted"
+      ],
+      "actions": {
+        "local": [
+          "storage:read",
+          "storage:write",
+          "storage:delete"
+        ],
+        "shared": [
+          "storage:share",
+          "storage:sync",
+          "storage:backup"
+        ],
+        "encrypted": [
+          "storage:encrypt",
+          "storage:decrypt",
+          "storage:key-manage"
+        ]
+      }
+    },
+    "sandbox": {
+      "description": "Sandbox environment permissions",
+      "scopes": [
+        "basic",
+        "enhanced",
+        "full"
+      ],
+      "actions": {
+        "basic": [
+          "sandbox:execute",
+          "sandbox:network",
+          "sandbox:storage"
+        ],
+        "enhanced": [
+          "sandbox:gpu",
+          "sandbox:audio",
+          "sandbox:video"
+        ],
+        "full": [
+          "sandbox:admin",
+          "sandbox:monitor",
+          "sandbox:debug"
+        ]
+      }
+    }
+  },
+  "defaults": {
+    "system": "guest",
+    "network": "public",
+    "storage": "local",
+    "sandbox": "basic"
+  },
+  "validation": {
+    "required": [
+      "system",
+      "network",
+      "storage",
+      "sandbox"
+    ],
+    "minPermissions": 1,
+    "maxPermissions": 4
+  }
+}
