@@ -1,4 +1,4 @@
-.PHONY: build deploy push publish test clean
+.PHONY: build deploy push publish test clean run start up
 
 # Build the application and Docker images
 build:
@@ -26,3 +26,15 @@ test:
 clean:
 	docker-compose down
 	docker volume prune -f
+
+# Run the application in development mode
+run:
+	docker-compose -f docker-compose.yml -f docker-compose.override.yml up --build
+
+# Start the application in production mode
+start:
+	docker-compose -f docker-compose.yml -f docker-compose.override.yml up -d
+
+# Start the application with compose up
+up:
+	docker-compose up -d
