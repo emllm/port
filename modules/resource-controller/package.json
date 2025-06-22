@@ -1,0 +1,5 @@
+{
+  "name": "resource-controller",
+  "version": "1.0.0",
+  "main": "permission-manager.js"
+}

@@ -3,8 +3,8 @@ version: '3.8'
 services:
   marketplace:
     build:
-      context: ../pwa-marketplace
-      dockerfile: docker/Dockerfile.marketplace
+      context: ./docker/marketplace
+      dockerfile: Dockerfile
     ports:
       - "8080:8080"
     volumes:
@@ -15,8 +15,8 @@ services:
 
   mcp-bridge:
     build:
-      context: ../pwa-marketplace
-      dockerfile: docker/Dockerfile.mcp-bridge
+      context: ./modules/mcp-bridge
+      dockerfile: Dockerfile
     ports:
       - "3000:3000"
     environment:
@@ -24,8 +24,8 @@ services:
 
   resource-controller:
     build:
-      context: ../pwa-marketplace
-      dockerfile: docker/Dockerfile.resource-controller
+      context: ./modules/resource-controller
+      dockerfile: Dockerfile
     ports:
       - "3001:3001"
     environment:
@@ -33,7 +33,7 @@ services:
 
   nginx:
     build:
-      context: ../pwa-marketplace/docker/nginx
+      context: ./docker/nginx
       dockerfile: Dockerfile
     ports:
       - "80:80"
