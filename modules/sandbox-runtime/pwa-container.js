@@ -1,4 +1,3 @@
-// modules/sandbox-runtime/pwa-container.js
 const EventEmitter = require('events');
 const path = require('path');
 const fs = require('fs').promises;

@@ -1,4 +1,3 @@
-// modules/mcp-bridge/protocols/system.js
 const os = require('os');
 const fs = require('fs').promises;
 const path = require('path');
