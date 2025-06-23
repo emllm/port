@@ -1,17 +1,6 @@
 version: '3.8'
 
 services:
-  marketplace:
-    build:
-      context: ./docker/marketplace
-      dockerfile: Dockerfile
-    ports:
-      - "8080:8080"
-    volumes:
-      - ../pwa-marketplace/src:/app/src
-      - ../pwa-marketplace/dist:/app/dist
-    environment:
-      - NODE_ENV=production
 
   mcp-bridge:
     build:
@@ -36,9 +25,8 @@ services:
       context: ./docker/nginx
       dockerfile: Dockerfile
     ports:
-      - "80:80"
-      - "443:443"
+      - "8080:80"
+      - "8443:443"
     depends_on:
-      - marketplace
       - mcp-bridge
       - resource-controller

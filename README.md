@@ -1,23 +1,133 @@
-# port
-user-friendly PWA Marketplace z GitHub integration, wbudowanym password managerem i secure sandboxing.
+# PWA Marketplace
 
+**User-friendly PWA Marketplace with GitHub integration, built-in password manager, and secure sandboxing.**
 
-# PWA Marketplace - Instalacja dla Użytkowników Nietechnicznych
+---
 
-## 🎯 Strategia "Double-Click & Done"
+## 🏁 Quick Start
 
-### Opcja 1: Standalone Desktop App (Rekomendowana)
-```
-PWA-Marketplace-Setup.exe          # Windows
-PWA-Marketplace-Setup.dmg          # macOS  
-PWA-Marketplace-Setup.AppImage     # Linux
-```
+### For End Users
+1. **Download** the installer for your system from [GitHub Releases](https://github.com/your-org/pwa-marketplace/releases):
+   - Windows: `PWA-Marketplace-Setup.exe`
+   - macOS: `PWA-Marketplace-Setup.dmg`
+   - Linux: `PWA-Marketplace-Setup.AppImage`
+2. **Run the installer** (double-click, or `chmod +x` for Linux).
+3. **Follow the 5-step setup wizard**.
+4. **Done!** The app icon appears in your system tray, access the marketplace via your browser at [http://localhost:8080](http://localhost:8080).
 
-**Proces instalacji:**
-1. **Download** → Jedna plik z GitHub Releases
-2. **Double-click** → Automatyczna instalacja
-3. **Setup Wizard** → 5 kroków (jak w UI powyżej)
-4. **Ready** → Ikona w system tray, dostęp przez przeglądarkę
+### For Developers
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/your-org/pwa-marketplace.git
+   cd pwa-marketplace
+   ```
+2. **Start all services (Docker):**
+   ```bash
+   docker compose up --build -d
+   ```
+3. **Access the app:**
+   - [http://localhost:8080](http://localhost:8080)
+   - [https://localhost:8443](https://localhost:8443) (if SSL configured)
+
+---
+
+## 📚 Documentation Index
+- [User-Friendly Deployment](user_friendly_deployment.md) – deployment strategies, user experience
+- [Modular Architecture](modular_pwa_marketplace.md) – technical & modular overview
+- [Project Plan](project_plan.md) – roadmap & progress
+
+---
+
+## 📝 Main Features
+- Secure PWA management with GitHub integration
+- Built-in password manager (AES-256 encrypted)
+- Desktop app (Tauri/Electron/Wails) and Docker support
+- Resource isolation, permission dialogs, audit logs
+- Auto-updates, system tray integration
+
+---
+
+## 🛠️ For Developers
+- **Frontend:** React + Vite + TypeScript
+- **Backend:** Rust (Tauri), Node.js modules
+- **Infrastructure:** Docker, Nginx, system bridge
+- **Build scripts:** see `/scripts` and Makefile
+- **Configuration:** see `/config` for security, permissions, sources
+
+### Useful Commands
+- Build frontend: `npm run build`
+- Build backend (Rust): `cargo build --release`
+- Build Docker images: `docker compose build`
+- Run in development: `docker compose -f docker-compose.yml -f docker-compose.dev.yml up`
+
+---
+
+## 🚀 Getting Started (User Instructions)
+
+### Windows
+1. Download `PWA-Marketplace-Setup.exe`
+2. Double-click to install
+3. Follow the setup wizard
+4. Start browsing PWA apps!
+
+### macOS
+1. Download `PWA-Marketplace-Setup.dmg`
+2. Drag to Applications
+3. Open and follow the wizard
+4. Grant permissions
+
+### Linux
+1. Download `PWA-Marketplace-Setup.AppImage`
+2. `chmod +x PWA-Marketplace-Setup.AppImage`
+3. Double-click to run
+4. Follow the setup wizard
+
+**Result:** Anyone can install and use PWA Marketplace in under 5 minutes! 🎉
+
+---
+
+## 🐳 Docker Compose Services
+- `nginx` (8080/8443): reverse proxy
+- `mcp-bridge` (3000): system integration
+- `resource-controller` (3001): permission management
+
+---
+
+## 🧩 Architecture Overview
+- See [modular_pwa_marketplace.md](modular_pwa_marketplace.md) for full details
+- Desktop wrapper (Tauri/Electron)
+- Docker backend (MCP, password manager)
+- Modular JS/Rust components
+
+---
+
+## ❓ FAQ & Troubleshooting
+
+### Nothing loads at http://localhost:8080
+- Make sure Docker is running and all containers are healthy (`docker compose ps`)
+- Check logs: `docker compose logs`
+
+### Desktop app won’t start
+- Ensure you downloaded the correct installer for your OS
+- On Linux, check executable permissions (`chmod +x`)
+
+### Where is my data stored?
+- All sensitive data is encrypted and stored locally. No data leaves your machine by default.
+
+### I need more help!
+- See [user_friendly_deployment.md](user_friendly_deployment.md) or open an issue on GitHub.
+
+---
+
+## 📎 Related Docs
+- [user_friendly_deployment.md](user_friendly_deployment.md)
+- [modular_pwa_marketplace.md](modular_pwa_marketplace.md)
+- [project_plan.md](project_plan.md)
+
+---
+
+## 🏷️ License
+MIT
 
 ## 📦 Architektura Deployment
 
